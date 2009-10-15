@@ -1,0 +1,29 @@
+set axesmode 1
+set antialiasdisplay on
+mo nomesh fill translucent  
+mo notfrontonly
+set measurementunits angstroms
+set cameradepth 0.4
+
+function init
+script /Users/albert/.jmol/startup
+end function
+
+function waters
+if(nowater);zoomto 0.3 (all) 0;display displayed or water;nowater=false;hydbondon;else;hydbondoff;display displayed and not water;center displayed;zoomto 0.3 (visible) 0;nowater=true;endif
+end function
+
+function hybonds
+if(hybond);connect 1.1 2.1 (oxygen or nitrogen) (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen))) delete;hybond=false;else;connect 1.1 2.1 (oxygen or nitrogen) (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen))) partial radius 0.05 yellow opaque create;hybond=true;endif
+end function
+
+function hydbondoff
+if(hybond);connect 1.1 2.2 (oxygen or nitrogen) (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen))) delete;endif
+end function
+function hydbondon
+if(hybond);connect 1.1 2.2 (oxygen or nitrogen) (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen))) partial radius 0.05 yellow opaque create;endif
+end function
+
+function startup
+script /Users/albert/.jmol/startup
+end function
