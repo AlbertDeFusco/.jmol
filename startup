@@ -9,6 +9,19 @@ function init
 script /Users/albert/.jmol/startup
 end function
 
+function watershell
+hydbondoff;
+display( (not water)
+or ( (oxygen and within(2.1,(not water) and hydrogen))
+     or connected(oxygen and within(2.1,(not water) and hydrogen)))
+or ( hydrogen and within(2.1,(not water) and (oxygen or nitrogen))
+     or connected(hydrogen and within(2.1,(not water) and (oxygen or nitrogen)))
+     or connected(connected(hydrogen and within(2.1,(not water) and (oxygen or nitrogen)))))
+);
+hydbondon;
+zoomto 0.3 (visible) 0;
+end function
+
 function waters
 if(nowater);zoomto 0.3 (all) 0;display displayed or water;nowater=false;hydbondon;else;hydbondoff;display displayed and not water;center displayed;zoomto 0.3 (visible) 0;nowater=true;endif
 end function
