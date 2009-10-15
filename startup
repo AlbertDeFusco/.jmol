@@ -31,10 +31,10 @@ if(hybond);connect 1.1 2.1 (oxygen or nitrogen) (hydrogen and (within(1.1,nitrog
 end function
 
 function hydbondoff
-if(hybond);connect 1.1 2.2 (oxygen or nitrogen) (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen))) delete;endif
+if(hybond);connect 1.1 2.1 (oxygen or nitrogen) (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen))) delete;endif
 end function
 function hydbondon
-if(hybond);connect 1.1 2.2 (oxygen or nitrogen) (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen))) partial radius 0.05 yellow opaque create;endif
+if(hybond);connect 1.1 2.1 (oxygen or nitrogen) (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen))) partial radius 0.05 yellow opaque create;endif
 end function
 
 function startup
