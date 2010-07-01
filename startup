@@ -9,6 +9,20 @@ function init
 script /Users/albert/.jmol/startup
 end function
 
+function align
+moveto 0 right;
+navigate 0 rotate z -90
+wateroff;
+end function
+
+function watertrans
+hydbondoff;
+display all;zoomto 0 (visible) 0;
+select water;spacefill off;wireframe 0.1;color atoms translucent 0.6;
+select none;
+connect 1.1 2.1 (visible and (oxygen or nitrogen)) (visible and (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen)))) partial radius 0.05 yellow translucent 0.8 create;
+end function;
+
 function watershell
 hydbondoff;
 display( (not water)
@@ -26,8 +40,15 @@ function waters
 if(nowater);zoomto 0.3 (all) 0;display displayed or water;nowater=false;hydbondon;else;hydbondoff;display displayed and not water;center displayed;zoomto 0.3 (visible) 0;nowater=true;endif
 end function
 
+function wateron
+zoomto 0.3 (all) 0;display all;nowater=false
+end function
+function wateroff
+display (not water);center displayed;zoomto 0.3 (visible) 0;nowater=true
+end function
+
 function hybonds
-if(hybond);connect 1.1 2.1 (oxygen or nitrogen) (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen))) delete;hybond=false;else;connect 1.1 2.1 (oxygen or nitrogen) (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen))) partial radius 0.05 yellow opaque create;hybond=true;endif
+if(hybond);connect 1.1 2.1 (visible and (oxygen or nitrogen)) (visible and (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen)))) delete;hybond=false;else;connect 1.1 2.1 (visible and (oxygen or nitrogen)) (visible and (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen)))) partial radius 0.05 yellow opaque create;hybond=true;endif
 end function
 
 function hydbondoff
@@ -39,4 +60,5 @@ end function
 
 function startup
 script /Users/albert/.jmol/startup
+nowater=false
 end function
