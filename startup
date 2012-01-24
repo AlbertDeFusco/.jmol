@@ -5,6 +5,9 @@ mo notfrontonly
 set measurementunits angstroms
 set cameradepth 0.4
 
+set labelalignment center; set labeloffset 0 0
+color label black
+
 function init
 script /Users/albert/.jmol/startup
 end function
@@ -18,9 +21,16 @@ end function
 function watertrans
 hydbondoff;
 display all;zoomto 0 (visible) 0;
-select water;spacefill off;wireframe 0.1;color atoms translucent 0.6;
+select water;spacefill off;wireframe 0.05;color atoms translucent 0.8;
 select none;
-connect 1.1 2.1 (visible and (oxygen or nitrogen)) (visible and (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen)))) partial radius 0.05 yellow translucent 0.8 create;
+connect 1.1 2.1 (visible and (oxygen or nitrogen)) (visible and (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen)))) partial radius 0.01 yellow translucent 0.8 create;
+end function;
+function watertransv
+hydbondoff;
+display all;zoomto 0 (visible) 0;
+select (not visible);spacefill off;wireframe 0.05;color atoms translucent 0.8;display all;
+select none;
+connect 1.1 2.1 (visible and (oxygen or nitrogen)) (visible and (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen)))) partial radius 0.01 yellow translucent 0.8 create;
 end function;
 
 function watershell
@@ -56,6 +66,9 @@ if(hybond);connect 1.1 2.1 (oxygen or nitrogen) (hydrogen and (within(1.1,nitrog
 end function
 function hydbondon
 if(hybond);connect 1.1 2.1 (oxygen or nitrogen) (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen))) partial radius 0.05 yellow opaque create;endif
+end function
+function hydbondont
+if(hybond);connect 1.1 2.1 (oxygen or nitrogen) (hydrogen and (within(1.1,nitrogen) or within(1.1,oxygen))) partial radius 0.05 yellow translucent 0.8 create;endif
 end function
 
 function startup
